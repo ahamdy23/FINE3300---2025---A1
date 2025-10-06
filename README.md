@@ -15,7 +15,7 @@ Rapid Weekly
 
 This part shows how choosing different payment schedules can affect how you manage and plan your mortgage.
 
-💱 Part 2 – Currency Converter
+Part 2 – Currency Converter
 
 This program takes user input for:
 The amount of currency to convert
