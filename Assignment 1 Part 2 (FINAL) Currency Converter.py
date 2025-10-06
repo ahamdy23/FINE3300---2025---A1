@@ -1,92 +1,75 @@
-import csv # Importing the data in CSV file
+import csv  # to read the csv file
 
-# This class is for reading exchange rates and converting between CAD and USD
+# this class is for reading exchange rates and changing money between CAD and USD
 class ExchangeRates:
 
     def __init__(self, fn):
+        # save the file name and start with no rate
         self.fn = fn
         self.r = None
 
     def getrate(self):
-        # Open the exchange rate file and read data
+        # open the csv file and read it
         with open(self.fn, "r", encoding="utf-8") as f:
             info = csv.reader(f)
             rows_lst = []
             for l in info:
-                rows_lst.append(l) # Collect each row from the file then turn into a list
+                rows_lst.append(l)  # put every row into a list
 
-        # Count how many rows there are
-        count = 0
-        for item in rows_lst:
-            count = count + 1
+        # find where the USD/CAD column is
+        header = rows_lst[0]
+        usd_index = header.index("USD/CAD")
 
-        # Get the most recent exchange rate (Last row)
-        lastl = rows_lst[count - 1]
+        # take the last line (latest rate)
+        lastl = rows_lst[-1]
 
-        # Grab the rate as a string
-        rt_txt = lastl[1]
+        # get the rate text
+        rt_txt = lastl[usd_index].strip()
 
+        # turn the rate into a number
+        number_rate = float(rt_txt)
 
-        # Turn the string into individual characters then bring them back together
-        letters = []
-        for ch in rt_txt:
-            letters.append(ch)
-
-        joined = ""
-        for x in letters:
-            joined = joined + x
-
-
-        # Convert the combined string into a number
-        number_rate = float(joined)
-
-        # Save rate for later use
+        # save it so we can use it later
         self.r = number_rate
 
     def convert(self, amount, inputcurr, outputcurr):
-        # If we don't already have the rate, go get it
+        # if we don’t have the rate yet, go get it
         if self.r == None:
             self.getrate()
 
-        r = self.r # Use the stored exchange rate
+        r = self.r  # use the rate we got
 
+        # usd to cad
+        if inputcurr == "USD" and outputcurr == "CAD":
+            return amount * r
+        
+        # cad to usd
+        if inputcurr == "CAD" and outputcurr == "USD":
+            return amount / r
 
-        # If converting from USD to CAD
-        if inputcurr == "USD":
-            if outputcurr == "CAD":
-                a1 = amount * r
-                return a1
-            
-        # If converting from CAD to USD
-        if inputcurr == "CAD":
-            if outputcurr == "USD":
-                a2 = amount / r
-                return a2
-
-        # If the currencies aren't recognized, show a message
-        print("I don't know")
+        # if something else, i don't know
+        print("I don't know that one.")
         return None
 
-# Ask the user for the input values
+
+# main part
 file_name = "BankOfCanadaExchangeRates.csv"
 
+# ask how much
 amt_input = input("How much money? ")
-amt = float(amt_input) # Turn the user input into a number
+amt = float(amt_input)
 
-# Ask for source currency and convert it into uppercase
-inputcurr = input("From which currency (CAD or USD)? ")
-inputcurr = inputcurr.upper()
+# ask what currency it’s from
+inputcurr = input("From which currency (CAD or USD)? ").upper()
 
-# Ask for target currency and convert it into uppercase
-outputcurr = input("To which currency (CAD or USD)? ")
-outputcurr = outputcurr.upper()
+# ask what currency it’s to
+outputcurr = input("To which currency (CAD or USD)? ").upper()
 
-# Create an exchangerates object and do the conversion
+# make the object and convert it
 ex = ExchangeRates(file_name)
 result = ex.convert(amt, inputcurr, outputcurr)
 
-#If conversion works, show result
+# print it out
 if result != None:
     print(str(round(amt, 2)) + " " + inputcurr + " is equal to " + str(round(result, 2)) + " " + outputcurr)
 
-        
