@@ -1,17 +1,30 @@
 # FINE3300---2025---A1
 
-Part 1 is a user friendly calculator that will calculate mortgage payments based on user input for:
-Principal amount
-Interest rate
-Amortization period
+This project is made up of two practical, user friendly Python tools designed to demonstrate key financial concepts in mortgage planning and currency conversion.
 
-The program outputs the following payment frequencies, rounded to the nearest penny:
-Monthly, Semi-monthly, Bi-weekly, Weekly, Rapid Bi-weekly, Rapid Weekly
+Part 1 – Mortgage Calculator
 
-This part shows how choosing different payment schedules can affect how you manage and plan your mortgage.
+This tool helps users calculate mortgage payments based on the following inputs:
+- Principal amount
+- Annual interest rate
+- Amortization period (in years)
+
+It then calculates and displays the mortgage payments across different payment frequencies:
+- Monthly
+- Semi-monthly
+- Bi-weekly
+- Weekly
+- Rapid Bi-weekly
+- Rapid Weekly
+
+By comparing these options, users can better understand how payment schedules impact their long term costs and plan their finances more effectively.
 
 Part 2 – Currency Converter
 
-This program takes user input for: The amount of currency to convert, The original currency, The target currency
+This program simulates a simple currency exchange tool. It asks the user to input:
+- The amount they want to convert
+- The original currency
+- The target currency
 
-It then shows the converted amount using the exchange rate provided for this assignment. It works like a simple currency exchange app.
+Using a manually entered exchange rate (for this assignment), it outputs the converted value. This helps demonstrate how real world currency apps function and showcases the role of exchange rates in financial decision making.
+
